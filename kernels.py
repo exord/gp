@@ -81,3 +81,18 @@ class QuasiPeriodicKernel(Kernel):
         return alpha[0] ** 2 * np.exp(-0.5 * dx ** 2 / alpha[1] ** 2 - 2.0 *
                                       np.sin((np.pi * dx / alpha[2])) ** 2 /
                                       alpha[3] ** 2)
+
+
+class DiagonalKernel(Kernel):
+    """
+    A convenience class to produce diagonal covariance functions.
+    """
+    def __init__(self, alpha=np.array([])):
+        """
+        :param array-like alpha: (4,) The parameter vector ``(amplitude,
+        decay time, period, structure param)``.
+        """
+        super(DiagonalKernel, self).__init__(alpha)
+
+    def _covariance(self, dx):
+        return np.eye(*dx.shape)
