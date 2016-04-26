@@ -1,3 +1,7 @@
+"""
+This module contains the Gaussian Process class.
+class GaussianProcess: A Class implementing Gaussian processes.
+"""
 import numpy as np
 from scipy.linalg import cho_factor, cho_solve
 
@@ -5,6 +9,10 @@ from scipy.linalg import cho_factor, cho_solve
 class GaussianProcess(object):
     """
     A Class implementing Gaussian processes.
+
+    Instances are constructed by providing a Kernel instance, an array of
+    input test coordinates where the GP is defined, and optionally an array
+    representing the data used to produce predictions.
     """
     def __init__(self, kernel, xinput, data=None):
         """
@@ -35,9 +43,7 @@ class GaussianProcess(object):
 
     @property
     def x(self):
-        """
-        The GP test input coordinate vector.
-        """
+        """The GP test input coordinate vector."""
         return self._input
 
     @x.setter
@@ -58,9 +64,11 @@ class GaussianProcess(object):
         self.covariance = None
 
     def get_test_input(self):
+        """Return the array of input coordinates."""
         return self.x
 
     def set_test_input(self, inputarray):
+        """Define inputarray as the GP input coordinates."""
         self.x = inputarray
 
     @property
@@ -82,6 +90,8 @@ class GaussianProcess(object):
         self.covariance_test_data = None
 
     def erasedata(self):
+        """Erases the GP data array and resets the relevant covariances
+        matrices."""
         del self.data
 
     def computecovariances(self, data):
@@ -90,7 +100,7 @@ class GaussianProcess(object):
         inputs (star).
 
         :param np.array data: a 2-D array with dimensions (2, n) or (3, n).
-        :returns: covariances matrices
+        :returns: two covariances matrices
         """
         xdata = data[0]
         dx_star_data = self.x[:, None] - xdata[None, :]
@@ -99,10 +109,31 @@ class GaussianProcess(object):
             dx_data)
 
     def sample(self, size=1):
+        """
+        Produce a sample from the GP functions.
+        :param int size: the size of the sample.
+        :return np.array: a (s, n) array, with s the sample size and n the
+        length of the test input array.
+        """
         return np.random.multivariate_normal(np.zeros_like(self.x),
                                              self.covariance, size)
 
     def prediction(self, data=None):
+        """
+        Evaluates the posterior GP mean and covariance functions.
+
+        This method computes the mean and covariance matrix of the posterior
+        predictive distribution of the GP. The mean and covariance matrix are
+        incorporated as attributes of the class and can be subsequently used to
+        draw samples of the function values corresponding to the input values.
+
+        If no data array is passed as argument, then the data attribute is used.
+
+        :param np.array data: a `(N x 2)` or `(N x 3)` array of N data inputs:
+         (data coordiante, data value, data error (optional)).
+
+        :return:
+        """
 
         if data is None and self.data is None:
             raise TypeError('Data array cannot be None, unless you want your'
@@ -137,3 +168,5 @@ class GaussianProcess(object):
         alpha = cho_solve((factor, flag), self.covariance_test_data.T)
         beta = np.dot(self.covariance_test_data, np.array(alpha))
         self.predcov = self.covariance - beta
+
+        return self.predmean, self.predcov
