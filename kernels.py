@@ -13,8 +13,8 @@ class Kernel(object):
 
     def covariance(self, dx):
         """
-        :param np.array dx: The difference matrix. This can be a numpy array
-        with arbitrary shape.
+        :param np.array dx: The difference matrix. This can be a numpy array of
+                            arbitrary shape.
 
         :return kermatrix: The kernel matrix (same shape as the input ``dx``).
         """

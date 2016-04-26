@@ -3,6 +3,7 @@ This module contains the Gaussian Process class.
 class GaussianProcess: A Class implementing Gaussian processes.
 """
 import numpy as np
+from numpy.random import multivariate_normal as mvn
 from scipy.linalg import cho_factor, cho_solve
 
 
@@ -38,7 +39,7 @@ class GaussianProcess(object):
         self.data = data
 
         # Initialize posterior mean and covariance to prior values
-        self.predmean = np.zeros(xinput)
+        self.predmean = np.zeros_like(xinput)
         self.predcov = self.covariance
 
     @property
@@ -132,7 +133,7 @@ class GaussianProcess(object):
         :param np.array data: a `(N x 2)` or `(N x 3)` array of N data inputs:
          (data coordiante, data value, data error (optional)).
 
-        :return:
+        :return: mean and covariance matrix of posterior predictive.
         """
 
         if data is None and self.data is None:
@@ -170,3 +171,17 @@ class GaussianProcess(object):
         self.predcov = self.covariance - beta
 
         return self.predmean, self.predcov
+
+    def prediction_sample(self, size=1):
+        """
+        Sample function values from the GP prediction.
+
+        :param int size: sample size to draw
+        :return np.array: a (s, n) array, with s the sample size and n the
+                          length of the test input array.
+        """
+        if np.array_equal(self.predcov, self.covariance):
+            raise RuntimeWarning('Posterior covariance is identical to prior '
+                                 'covariance. Try using the prediction method '
+                                 'first.')
+        return mvn(mean=self.predmean, cov=self.predcov, size=size)
