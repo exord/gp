@@ -21,10 +21,10 @@ def sample_gp(x, gp=None, alpha=np.empty(0), kerneltype='se', size=1):
         gp.set_test_input(x)
         return gp.sample(size)
     # Otherwise, construct instance on the fly.
-
-    # COMPLETE HERE!
     elif kerneltype == 'se':
         return kernels.SquaredExponentialKernel(alpha).sample(x, size)
+    elif kerneltype == 'ge':
+        return kernels.GeneralisedExponentialKernel(alpha).sample(x, size)
     elif kerneltype == 'qper':
         return kernels.QuasiPeriodicKernel(alpha).sample(x, size)
     else:
@@ -74,6 +74,10 @@ class GaussianProcess(object):
         dx = self._input[:, None] - self._input[None, :]
         self.covariance = self.kernel.covariance(dx)
 
+        if self.data is not None:
+            cov_star_data, cov_data = self.computecovariances(self._data)
+            self.covariance_test_data = cov_star_data
+
     @x.deleter
     def x(self):
         self._input = None
@@ -111,6 +115,7 @@ class GaussianProcess(object):
         Compute the covariances between the data inputs (data) and the test
         inputs (star).
 
+        :param np.array data: a 2-D array with dimensions (2, n) or (3, n).
         :returns: covariances matrices
         """
         xdata = data[0]
@@ -141,8 +146,14 @@ class GaussianProcess(object):
             self.covariance_test_data = cov_test_data
             self.covariance_data = cov_data
 
+        # If errors are provided for data, add them to the covariance diagonal
+        if self.data.shape[0] > 2:
+            dataerror = np.diag(self.data[2] ** 2)
+        else:
+            dataerror = np.diag(np.zeros_like(self.data[0]))
+
         # Use Cholesky decomposition on covariance of data inputs.
-        factor, flag = cho_factor(self.covariance_data)
+        factor, flag = cho_factor(self.covariance_data + dataerror)
 
         # Compute posterior mean (eq. 2.23 Rasmussen)
         a = cho_solve((factor, flag), self.data[1])
