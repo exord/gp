@@ -1,8 +1,11 @@
 from distutils.core import setup
 
-setup(name='gp',
-      version='1.0',
+setup(name='pygpr',
+      description='Basic Gaussian process regression tasks in pure python.',
+      version='0.1.0',
       author='Rodrigo F. Diaz',
       author_email='rodrigo.diaz@unige.ch',
+      url='http://obswww.unige.ch/~diazr/gp/',
       packages=['gp'],
+      requires=['numpy', 'scipy.linalg']
       )
