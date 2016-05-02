@@ -12,6 +12,14 @@ Description
 
 See :ref:`detailed-description` for links to the python classes.
 
+Installation
+------------
+``gp`` is available in the PyPI. You can therefore install it using the ``pip`` command::
+
+  pip install pygpr
+
+For more details and instructions to get the entire repository, see the :ref:`installation` page.
+
 Usage example
 -------------
 
