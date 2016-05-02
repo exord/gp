@@ -5,7 +5,7 @@ setup(name='pygpr',
       version='0.1.0',
       author='Rodrigo F. Diaz',
       author_email='rodrigo.diaz@unige.ch',
-      url='http://obswww.unige.ch/~diazr/gp/',
+      url='http://obswww.unige.ch/~diazr/pygpr',
       packages=['gp'],
       requires=['numpy', 'scipy.linalg']
       )
