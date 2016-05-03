@@ -14,7 +14,7 @@ See :ref:`detailed-description` for links to the python classes.
 
 Installation
 ------------
-``gp`` is available in the PyPI. You can therefore install it using the ``pip`` command::
+``gp`` is available in the PyPI_. You can therefore install it using the ``pip`` command::
 
   pip install pygpr
 
@@ -104,3 +104,4 @@ Indices and tables
 * :ref:`modindex`
 * :ref:`search`
 
+.. _PyPI: https://pypi.python.org/pypi/pygpr
