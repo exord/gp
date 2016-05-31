@@ -39,13 +39,13 @@ class SquaredExponentialKernel(Kernel):
     """
     A class implementing the squared exponential kernel.
 
-    :param array-like alpha: (2,) The parameter vector ``(amplitude,
-    lengthscale)``.
+    :param array-like alpha: (2,) The parameter vector (amplitude,
+    lengthscale).
     """
     def __init__(self, alpha):
         """
-        :param array-like alpha: (2,) The parameter vector ``(amplitude,
-        lengthscale)``.
+        :param array-like alpha: (2,) The parameter vector (amplitude,
+        lengthscale).
         """
         super(SquaredExponentialKernel, self).__init__(alpha)
 
@@ -58,13 +58,13 @@ class GeneralisedExponentialKernel(Kernel):
     """
     A class implementing the squared exponential kernel.
 
-    :param array-like alpha: (3,) The parameter vector ``(amplitude,
-    lengthscale, exponent)``.
+    :param array-like alpha: (3,) The parameter vector (amplitude,
+    lengthscale, exponent).
     """
     def __init__(self, alpha):
         """
-        :param array-like alpha: (3,) The parameter vector ``(amplitude,
-        lengthscale, exponent)``.
+        :param array-like alpha: (3,) The parameter vector (amplitude,
+        lengthscale, exponent).
         """
         super(GeneralisedExponentialKernel, self).__init__(alpha)
 
@@ -77,13 +77,13 @@ class QuasiPeriodicKernel(Kernel):
     """
     A class implementing the quasiperiodic kernel.
 
-    :param array-like alpha: (4,) The parameter vector ``(amplitude,
-    decay time, period, structure param)``.
+    :param array-like alpha: (4,) The parameter vector (amplitude,
+    decay time, period, structure param).
     """
     def __init__(self, alpha):
         """
-        :param array-like alpha: (4,) The parameter vector ``(amplitude,
-        decay time, period, structure param)``.
+        :param array-like alpha: (4,) The parameter vector (amplitude,
+        decay time, period, structure param).
         """
         super(QuasiPeriodicKernel, self).__init__(alpha)
 
