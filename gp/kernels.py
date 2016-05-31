@@ -4,6 +4,8 @@ import numpy as np
 class Kernel(object):
     """
     Base class for Gaussian process kernels.
+
+    :param array-like alpha: The hyperparameters.
     """
     def __init__(self, alpha):
         """
@@ -36,6 +38,9 @@ class Kernel(object):
 class SquaredExponentialKernel(Kernel):
     """
     A class implementing the squared exponential kernel.
+
+    :param array-like alpha: (2,) The parameter vector ``(amplitude,
+    lengthscale)``.
     """
     def __init__(self, alpha):
         """
@@ -52,6 +57,9 @@ class SquaredExponentialKernel(Kernel):
 class GeneralisedExponentialKernel(Kernel):
     """
     A class implementing the squared exponential kernel.
+
+    :param array-like alpha: (3,) The parameter vector ``(amplitude,
+    lengthscale, exponent)``.
     """
     def __init__(self, alpha):
         """
@@ -68,6 +76,9 @@ class GeneralisedExponentialKernel(Kernel):
 class QuasiPeriodicKernel(Kernel):
     """
     A class implementing the quasiperiodic kernel.
+
+    :param array-like alpha: (4,) The parameter vector ``(amplitude,
+    decay time, period, structure param)``.
     """
     def __init__(self, alpha):
         """
@@ -88,10 +99,6 @@ class DiagonalKernel(Kernel):
     A convenience class to produce diagonal covariance functions.
     """
     def __init__(self, alpha=np.array([])):
-        """
-        :param array-like alpha: (4,) The parameter vector ``(amplitude,
-        decay time, period, structure param)``.
-        """
         super(DiagonalKernel, self).__init__(alpha)
 
     def _covariance(self, dx):

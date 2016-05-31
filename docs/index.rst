@@ -14,7 +14,7 @@ See :ref:`detailed-description` for links to the python classes.
 
 Installation
 ------------
-``gp`` is available in the PyPI_. You can therefore install it using the ``pip`` command::
+``gp`` is available in the PyPI_ under the name ``pygpr``. You can therefore install it using the ``pip`` command::
 
   pip install pygpr
 
