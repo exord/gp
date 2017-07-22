@@ -10,8 +10,8 @@ subclasses and GaussianProcess:
 class GaussianProcess: the main class of the package.
 module kernels: a module containing the Kernel class and its subclasses.
 """
-import kernels
-from gaussianprocess import GaussianProcess
+from . import kernels
+from .gaussianprocess import GaussianProcess
 
 __all__ = ['GaussianProcess', 'kernels']
 
