@@ -6,6 +6,8 @@ import numpy as np
 from numpy.random import multivariate_normal as mvn
 from scipy.linalg import cho_factor, cho_solve
 
+from . import kernels as kernelmod
+
 
 class GaussianProcess(object):
     """
@@ -19,7 +21,7 @@ class GaussianProcess(object):
         """
         :param kernel: an instance of the :class:`~gp.kernels.Kernel`
         :param np.array xinput: "test" input coordinates.
-        :param np.array data: a `(N x 2)` or `(N x 3)` array of N data inputs:
+        :param np.array data: a `(2 x N)` or `(3 x N)` array of N data inputs:
          (data coordiante, data value, data error (optional)).
         """
         # Initialise input attributes (for PEP-8 compliance).
@@ -180,7 +182,8 @@ class GaussianProcess(object):
         :return np.array: a (s, n) array, with s the sample size and n the
                           length of the test input array.
         """
-        if np.array_equal(self.predcov, self.covariance):
+        if np.array_equal(self.predcov, self.covariance) \
+                and not isinstance(self.kernel, kernelmod.DiagonalKernel):
             raise RuntimeWarning('Posterior covariance is identical to prior '
                                  'covariance. Try using the prediction method '
                                  'first.')

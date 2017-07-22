@@ -90,7 +90,7 @@ class QuasiPeriodicKernel(Kernel):
     def _covariance(self, dx):
         alpha = self.hyperparams
         return alpha[0] ** 2 * np.exp(-0.5 * dx ** 2 / alpha[1] ** 2 - 2.0 *
-                                      np.sin((np.pi * dx / alpha[2])) ** 2 /
+                                      np.sin(np.pi * dx / alpha[2]) ** 2 /
                                       alpha[3] ** 2)
 
 
@@ -102,4 +102,22 @@ class DiagonalKernel(Kernel):
         super(DiagonalKernel, self).__init__(alpha)
 
     def _covariance(self, dx):
-        return np.eye(*dx.shape)
+        # Initialise covariance vector with zeros.
+        c = np.zeros_like(dx)
+        # Put ones where dx = 0
+        c[dx == 0] = 1
+        return c
+
+
+class KernelSum(Kernel):
+    """
+    A class to produce a sum of kernels.
+    """
+    def __init__(self, kernels):
+        self.kernels = kernels
+
+    def _covariance(self, dx):
+        output = np.zeros_like(dx)
+        for ker in self.kernels:
+            output += ker.covariance(dx)
+        return output
