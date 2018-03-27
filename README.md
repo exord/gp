@@ -3,12 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-gp
-===
+pygpr
+=====
 
 Description
 -----------
-``gp`` is a python package to perform basic Gaussian Process (GP) regression tasks, such as sampling function values from a GP, or evaluating the posterior predictive distribution given some data.
+``pygpr`` is a python package to perform basic Gaussian Process (GP) regression tasks, such as sampling function values from a GP, or evaluating the posterior predictive distribution given some data.
 
 See :ref:`detailed-description` for links to the python classes.
 
@@ -21,17 +21,17 @@ A short example using a squared exponential kernel. You can copy the code blocs 
     import pylab as plt
     plt.ion()
 
-    import gp
+    import pygpr
    
     # Create an instance of a squared exponential kernel.
     # Hyper parameters are: 1.0 for the amplitude and 0.1 for the length scale.
-    sek = gp.kernels.SquaredExponentialKernel([1.0, 0.1])
+    sek = pygpr.kernels.SquaredExponentialKernel([1.0, 0.1])
 
     # Define the sample input points where the GP will be defined.
     x = np.linspace(0.0, 1.0, 400)
 
     # Build a GP instance passing the Kernel instance and the input array.
-    mygp = gp.GaussianProcess(sek, x)
+    mygp = pygpr.GaussianProcess(sek, x)
 
     # Sample the GP function values
     f = mygp.sample(size=5)

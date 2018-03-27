@@ -1,29 +1,29 @@
-gp package
+pygpr package
 ==========
 
 Submodules
 ----------
 
-gp.core module
+pygpr.core module
 --------------
 
-.. automodule:: gp.core
+.. automodule:: pygpr.core
     :members:
     :undoc-members:
     :show-inheritance:
 
-gp.gaussianprocess module
+pygpr.gaussianprocess module
 -------------------------
 
-.. automodule:: gp.gaussianprocess
+.. automodule:: pygpr.gaussianprocess
     :members:
     :undoc-members:
     :show-inheritance:
 
-gp.kernels module
+pygpr.kernels module
 -----------------
 
-.. automodule:: gp.kernels
+.. automodule:: pygpr.kernels
     :members:
     :undoc-members:
     :show-inheritance:
@@ -32,7 +32,7 @@ gp.kernels module
 Module contents
 ---------------
 
-.. automodule:: gp
+.. automodule:: pygpr
     :members:
     :undoc-members:
     :show-inheritance:

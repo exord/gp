@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #
-# gp documentation build configuration file, created by
+# pygpr documentation build configuration file, created by
 # sphinx-quickstart on Tue Apr 26 15:54:25 2016.
 #
 # This file is execfile()d with the current directory set to its
@@ -53,7 +53,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'gp'
+project = u'pygpr'
 copyright = u'2016, Rodrigo F. Díaz'
 author = u'Rodrigo F. Díaz'
 email = u'rodrigo.diaz@unige.ch'
@@ -208,7 +208,7 @@ html_static_path = ['_static']
 #html_search_scorer = 'scorer.js'
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'gpdoc'
+htmlhelp_basename = 'pygprdoc'
 
 # -- Options for LaTeX output ---------------------------------------------
 
@@ -230,7 +230,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'gp.tex', u'gp Documentation',
+    (master_doc, 'pygpr.tex', u'pygpr Documentation',
      u'Rodrigo F. Díaz', 'manual'),
 ]
 
@@ -260,7 +260,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'gp', u'gp Documentation',
+    (master_doc, 'pygpr', u'pygpr Documentation',
      [author], 1)
 ]
 
@@ -274,8 +274,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'gp', u'gp Documentation',
-     author, 'gp', 'One line description of project.',
+    (master_doc, 'pygpr', u'pygpr Documentation',
+     author, 'pygpr', 'One line description of project.',
      'Miscellaneous'),
 ]
 
